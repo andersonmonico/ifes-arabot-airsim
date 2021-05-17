@@ -55,23 +55,6 @@ void drive(msr::airlib::CarRpcLibClient &client, float &acceleration, float &ste
 	controls.steering = steering;
 	client.setCarControls(controls);
 }
-bool LeituraMapa(const char* mapaPista, int x, int y) {
-	segment::image<segment::uchar>* faixa;
-	faixa = segment::loadPBM(mapaPista);
-	if (faixa->access[150 + x][150 + y] == 1) {
-		return 1;
-	}
-}
-
-void VerificaFaixa(const char* mapaPista, int x, int y) {
-	segment::image<segment::uchar>* pista;
-	pista = new segment::image<unsigned char>(300, 300, false);
-	pista->init(1);
-	pista->access[150 + x][150 + y] = 0;
-	if (pista->access[150 + x][150 + y] == 0 && LeituraMapa(mapaPista, x, y)) {
-		std::cout << "Fora da faixa ! \n" << std::endl;
-	}
-}
 
 int main()
 {
